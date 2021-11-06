@@ -8,6 +8,8 @@ import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import TankMovement.Elements.Point;
+
 public class Display extends JPanel implements KeyListener {
 
     private static final int size = 900;
@@ -50,15 +52,15 @@ public class Display extends JPanel implements KeyListener {
 
     private void paintTank(Graphics g) {
 
-        double[][][] tankPoints = tank.getTankPoints();
+        Point[] tankPoints = tank.getTankPoints();
 
         double x;
         double y;
 
         for (int i = 0; i < tankPoints.length; i++) {
 
-            x = tankPoints[i][0][0] * parameter + size / 2;
-            y = (tankPoints[i][1][0] * parameter) * -1 + size / 2;
+            x = tankPoints[i].getMatrix()[0][0] * parameter + size / 2;
+            y = (tankPoints[i].getMatrix()[1][0] * parameter) * -1 + size / 2;
 
             g.setColor(Color.GREEN);
             g.drawLine((int) x,(int) y,(int) x,(int) y);

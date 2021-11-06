@@ -1,38 +1,24 @@
 package TankMovement;
 
-public class Tank {
-    
-    private double[][][] points = {
-        {
-            {0f + 3f},
-            {0f + 3f},
-            {1f}
-        },
-        {
-            {0f + 3f}, 
-            {1f + 3f}, 
-            {1f}
-        },
-        {
-            {-1f + 3f},
-            {-.3 + 3f},
-            {1f}
-        },
-        {
-            {1f + 3f},
-            {-.3 + 3f},
-            {1f}
-        }
-    };
+import TankMovement.Elements.Point;
 
-    public double[][][] getTankPoints() {
+public class Tank {
+
+    private static final double offset = 3f;
+
+    private Point[] points = {new Point(0f + offset, 0f + offset), 
+        new Point(0f + offset, 1f + offset), 
+        new Point(-1f + offset, -.3f + offset), 
+        new Point(1f + offset, -.3f + offset)};
+
+    public Point[] getTankPoints() {
         return points;
     }
 
     public void move(double speed) {
 
-        double x = points[1][0][0] - points[0][0][0];
-        double y = points[1][1][0] - points[0][1][0];
+        double x = points[1].getMatrix()[0][0] - points[0].getMatrix()[0][0];
+        double y = points[1].getMatrix()[1][0] - points[0].getMatrix()[1][0];
 
         double length = 1 / (Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)));
 
@@ -50,13 +36,13 @@ public class Tank {
             {0f, 0f, 1f}
         };
 
-        double[][] center = points[0];
+        double[][] center = points[0].getMatrix();
 
         translate(-center[0][0], -center[1][0]);
 
         for (int i = 0; i < points.length; i++) {
 
-            points[i] = matmul(rotationMatrix, points[i]);
+            points[i].setMatrix(matmul(rotationMatrix, points[i].getMatrix()));
         }
 
         translate(center[0][0], center[1][0]);
@@ -72,7 +58,7 @@ public class Tank {
 
         for (int i = 0; i < points.length; i++) {
 
-            points[i] = matmul(translationMathix, points[i]);
+            points[i].setMatrix(matmul(translationMathix, points[i].getMatrix()));
         }
     }
 

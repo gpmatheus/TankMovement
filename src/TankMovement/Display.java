@@ -12,9 +12,9 @@ import TankMovement.Elements.Point;
 
 public class Display extends JPanel implements KeyListener {
 
-    private static final int size = 900;
+    private static final int size = 400;
     private static final int parameter = 40;
-    
+
     private Tank tank = new Tank();
     private TankController tm = new TankController(this, tank);
 
@@ -37,9 +37,9 @@ public class Display extends JPanel implements KeyListener {
         frame.setSize(size, size);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
-        frame.setVisible(true);
         frame.add(this);
         frame.addKeyListener(this);
+        frame.setVisible(true);
     }
 
     @Override
@@ -63,12 +63,13 @@ public class Display extends JPanel implements KeyListener {
             y = (tankPoints[i].getMatrix()[1][0] * parameter) * -1 + size / 2;
 
             g.setColor(Color.GREEN);
-            g.drawLine((int) x,(int) y,(int) x,(int) y);
+            g.drawLine((int) x, (int) y, (int) x, (int) y);
         }
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {}
+    public void keyTyped(KeyEvent e) {
+    }
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -95,7 +96,7 @@ public class Display extends JPanel implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        
+
         switch (e.getKeyChar()) {
             case 'w':
 
@@ -116,5 +117,4 @@ public class Display extends JPanel implements KeyListener {
         }
     }
 
-    
 }
